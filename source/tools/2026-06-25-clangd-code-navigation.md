@@ -1,5 +1,6 @@
 ---
 author: 晚吟
+category: tools
 tags:
   - clangd
   - vscode
@@ -8,6 +9,7 @@ tags:
 ---
 
 ```{post} 2026-06-25
+:category: tools
 ```
 
 # clangd 代码跳转环境搭建
