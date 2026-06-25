@@ -14,14 +14,27 @@ tags:
 
 会话（Session）是 Claude Code 中与项目目录关联的已保存对话。Claude Code 在你工作时将对话本地存储，因此你可以从中断处恢复、分支以尝试不同的方法，或在任务之间切换。
 
+> **环境说明：** 本文以 MobaXterm SSH 连接远程开发机为典型场景。会话管理完全由 Claude Code 自身处理，与终端软件（MobaXterm / iTerm2 / Windows Terminal 等）无关——即使终端断开，会话仍然保留在服务器上。
+
+## 保存机制
+
+Claude Code **默认自动保存**所有对话历史，以 JSONL 格式存储在 `~/.claude/projects/` 目录下。无论是正常退出、`/clear` 清空上下文，还是终端意外断开（如关闭 MobaXterm 标签页），对话记录都不会丢失——**无需任何手动保存操作**。
+
 ## 恢复会话
 
-会话在运行时持续保存到本地文本记录文件，因此退出或执行 `/clear` 后仍可返回。
+日常使用中，只需要记住两个最常用的命令：
+
+```bash
+claude -c    # 继续最近一次会话（等同于 claude --continue）
+claude -r    # 调出历史会话列表选择（等同于 claude --resume）
+```
+
+完整入口：
 
 | 命令 | 功能 |
 |:--|:--|
-| `claude --continue` | 恢复当前目录最近的会话 |
-| `claude --resume` | 打开会话选择器 |
+| `claude -c` / `claude --continue` | 恢复当前目录最近的会话 |
+| `claude -r` / `claude --resume` | 打开会话选择器 |
 | `claude --resume <name>` | 直接恢复指定名称的会话 |
 | `claude --from-pr <number>` | 恢复链接到该 PR 的会话 |
 | `/resume` | 从活跃会话内切换到不同对话 |
@@ -32,14 +45,33 @@ tags:
 claude --resume <session-id>
 ```
 
-会话 ID 查找的范围限于当前项目目录及其 git worktrees，在其他地方创建的会话会报告 `No conversation found`。
+### 关键词搜索
+
+如果记得上次对话涉及的内容，可以直接用关键词过滤：
+
+```bash
+claude -r "数据库"
+claude -r "React"
+```
+
+选择器会只显示匹配的会话。
+
+### 核心注意事项
+
+**工作目录绑定：** Claude Code 的会话与当前工作目录强绑定。恢复会话前，务必先 `cd` 进入对应项目目录：
+
+```bash
+cd ~/workspace/my-project
+claude -c    # 恢复 my-project 的最近会话
+```
+
+**避免移动项目文件夹：** 不要随意移动项目目录的位置。Claude Code 内部索引使用绝对路径，移动后恢复功能会因为路径对不上而找不到历史记录。
+
+**MobaXterm 场景：** 关闭 MobaXterm 标签页或网络断开后，会话已自动保存在服务器上。重新 SSH 连接，`cd` 到项目目录，`claude -c` 即可无缝继续。
 
 ### 会话选择器查找范围
 
-会话按项目目录存储。默认情况下，选择器显示当前 worktree 的交互式会话，以及在其他地方启动但通过 `/add-dir` 添加了当前目录的会话。
-
-- `Ctrl+W` — 扩展到仓库所有 worktree
-- `Ctrl+A` — 扩展到整台电脑上每个项目
+会话按项目目录存储。默认情况下，选择器显示当前 worktree 的交互式会话。使用 `Ctrl+W` 扩展到所有 worktree，`Ctrl+A` 扩展到整台电脑上每个项目。
 
 按名称恢复会跨当前仓库及其 worktree 解析：
 
@@ -50,14 +82,21 @@ claude --resume <session-id>
 
 ## 命名会话
 
-为会话提供描述性名称，便于在会话选择器中查找和按名称恢复。
+为会话提供描述性名称，便于在会话选择器中查找和按名称恢复。这在并行处理多个任务时尤其重要。
 
 | 时机 | 方法 |
 |:--|:--|
-| 启动时 | `claude -n auth-refactor` |
-| 会话期间 | `/rename auth-refactor` |
+| 启动时 | `claude -n api-migration` |
+| 会话期间 | `/rename api-migration`（名称会出现在提示栏上） |
 | 从选择器 | 选中会话按 `Ctrl+R` |
 | Plan Mode 接受计划时 | 自动从计划内容命名 |
+
+命名后，可以直接通过名称恢复：
+
+```bash
+claude --resume api-migration
+/resume api-migration
+```
 
 ## 会话选择器
 
@@ -110,7 +149,7 @@ claude --continue --fork-session
 
 ## 导出和定位会话数据
 
-**导出会话：** 运行 `/export` 将当前对话复制到剪贴板或保存为纯文本文件。可传递文件名直接写入。
+**导出会话：** 运行 `/export` 将当前对话复制到剪贴板或保存为纯文本文件：
 
 ```bash
 /export my-session-transcript.txt
@@ -122,7 +161,7 @@ claude --continue --fork-session
 ~/.claude/projects/<project>/<session-id>.jsonl
 ```
 
-`<project>` 从工作目录路径派生。每行是消息、工具调用或元数据的 JSON 对象。
+每行是消息、工具调用或元数据的 JSON 对象。
 
 **更改存储位置：**
 
