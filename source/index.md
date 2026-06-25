@@ -57,7 +57,7 @@ AI 编程方法论 · 工具链
 :::
 
 :::{grid-item-card} ⌨️ Claude Code
-:link: claude-code/index.html
+:link: vibe-coding/claude-code/index.html
 
 安装 · 配置 · 会话管理
 :::
@@ -75,7 +75,7 @@ AI 编程方法论 · 工具链
 embedded/index
 tools/index
 vibe-coding/index
-claude-code/index
+vibe-coding/claude-code/index
 cs/index
 career/index
 life/index
