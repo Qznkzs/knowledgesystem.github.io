@@ -1,12 +1,9 @@
 # 嵌入式
 
-:::{toctree}
-:maxdepth: 2
-:glob:
+MCU、RTOS、Linux、硬件设计、工具链——嵌入式开发全栈笔记。
 
-mcu/*
-rtos/*
-linux/*
-hardware/*
-toolchain/*
-:::
+```{postlist}
+:category: mcu, rtos, linux, hardware, toolchain
+:date: "%Y-%m-%d"
+:excerpts:
+```

@@ -60,5 +60,13 @@ MCU · RTOS · Linux · 硬件 · 工具链
 ```{toctree}
 :hidden:
 
+embedded/index
+tools/index
+cs/index
+career/index
+life/index
 guide/index
+guide/build
+guide/usage
+guide/maintenance
 ```
