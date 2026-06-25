@@ -1,0 +1,38 @@
+{
+  "C_Cpp.intelliSenseEngine": "disabled",
+  "C_Cpp.autocompleteAddParentheses": true,
+  "C_Cpp.codeAnalysis.clangTidy.enabled": false,
+  "C_Cpp.autoAddFileAssociations": false,
+  "clangd.path": "clangd",
+  "clangd.arguments": [
+    "--background-index",
+    "--clang-tidy=false",
+    "--header-insertion=never",
+    "--completion-style=detailed",
+    "--function-arg-placeholders=false",
+    "--log=error",
+    "-j=4"
+  ],
+  "clangd.fallbackFlags": [],
+  "editor.formatOnSave": false,
+  "files.associations": {
+    "*.h": "c",
+    "*.mk": "makefile",
+    "Makefile": "makefile",
+    "*.lds": "c"
+  },
+  "files.exclude": {
+    "**/.svn": true
+  },
+  "search.exclude": {
+    "**/.svn": true,
+    "**/release": true,
+    "**/tools": true,
+    "**/.vscode/ipch": true
+  },
+  "files.watcherExclude": {
+    "**/.svn/**": true,
+    "**/release/**": true,
+    "**/.vscode/ipch/**": true
+  }
+}

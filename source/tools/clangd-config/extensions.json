@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "llvm-vs-code-extensions.vscode-clangd",
+    "ms-vscode.makefile-tools",
+    "xaver.clang-format"
+  ],
+  "unwantedRecommendations": [
+    "ms-vscode.cpptools"
+  ]
+}

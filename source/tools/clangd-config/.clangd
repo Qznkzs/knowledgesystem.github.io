@@ -1,0 +1,76 @@
+# clangd configuration for hbvdoorbell firmware (SSC377)
+# This provides fallback compile flags when compile_commands.json is absent.
+# Flags from compile_commands.json take precedence; these are appended on top.
+
+CompileFlags:
+  Add:
+    # ---------- chip / product defines ----------
+    - -DPMODEL=0x53537700
+    - -DPRODUCT="DOORBELL"
+    - -DBRAND_BV
+    - -DCUSTOMER=0
+    - -DMODELID=0x1000
+    # ---------- feature flags (common enabled set) ----------
+    - -DSUPPORT_ALEXA
+    - -DSUPPORT_WEB
+    - -DSUPPORT_YC1323
+    - -DSUPPORT_SMARTVIDEO
+    - -DSUPPORT_SOFTAP
+    - -DSUPPORT_N1
+    - -DSUPPORT_RAMFS
+    - -DSUPPORT_EN
+    - -DSUPPORT_RTSP
+    - -DSUPPORT_WIFI
+    - -DSUPPORT_HTTPAPI
+    - -DSUPPORT_SRT
+    - -DSUPPORT_SSL
+    # ---------- project include paths (relative to .clangd location) ----------
+    - -Iinclude
+    - -Iinclude/common
+    - -Iinclude/services
+    - -Iinclude/drv
+    - -Imodules/utils
+    - -Ichips/common/avcfg/include
+    - -Ichips/common/memmng/include
+    - -Ichips/ssc37x/arch/ssc377/sdk/include
+    - -Ichips/ssc37x/arch/ssc377/sdk/rtos
+    - -Ichips/ssc37x/arch/ssc377/sdk/af/include
+    - -Ichips/ssc37x/arch/ssc377/sdk/smartva_md/include
+    - -Ichips/ssc37x/arch/ssc377/sdk/softir/include
+    - -Ithirdparty/libcjson/include
+    - -Ithirdparty/libmbedtls/include
+    - -Ithirdparty/libxml/include
+    - -Ithirdparty/libflvmuxer/include
+    - -Ithirdparty/libflash/include
+    - -Ithirdparty/libmp4/include
+    - -Ithirdparty/libex_codec/include
+    - -Ithirdparty/libqrdecode/include
+    - -Ithirdparty/libjpeg/include
+    - -Ithirdparty/libtsmuxer/include
+    - -Ithirdparty/libovfcore/include
+    - -Ithirdparty/libwpa/include
+    - -Iplatforms/alexa/include
+    - -Iplatforms/alexa/ssc377/include
+    - -Iplatforms/apserv/include
+    - -Iplatforms/egardia/include
+    - -Iplatforms/gattserv/include
+    - -Iplatforms/n1gateway/include
+    - -Iplatforms/onvif/include
+    - -Iplatforms/poolscout/include
+    - -Iplatforms/smartvideo/include
+    - -Iplatforms/smartvideo/sigma_person/ssc377/include
+    - -Iplatforms/srtserv/include
+    - -Iplatforms/yc1323/include
+    # ---------- cross-compiler sysroot for system headers ----------
+    - --sysroot=/opt/toolchains/arm-sigmastar-linux-uclibcgnueabihf-9.1.0/arm-sigmastar-linux-uclibcgnueabihf/sysroot
+  CompilationDatabase: .
+
+Index:
+  Background: Build
+
+Diagnostics:
+  Suppress:
+    - pp_file_not_found       # silence missing SDK headers that aren't in the tree
+    - drv_unsupported_opt     # silence unsupported ARM gcc flags in clang
+  UnusedIncludes: None
+  MissingIncludes: None
