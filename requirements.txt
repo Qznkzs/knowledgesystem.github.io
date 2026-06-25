@@ -1,0 +1,5 @@
+sphinx>=7.0
+myst-parser>=3.0
+ablog>=0.11
+pydata-sphinx-theme>=0.15
+sphinx-design>=0.5
