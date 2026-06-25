@@ -17,7 +17,7 @@ blog: true
 
 ## 📂 分类导航
 
-::::{grid} 2 2 3 3
+::::{grid} 2 2 4 4
 :gutter: 3
 
 :::{grid-item-card} 🔧 嵌入式
@@ -50,6 +50,18 @@ MCU · RTOS · Linux · 硬件 · 工具链
 阅读 · 旅行 · 日常感悟
 :::
 
+:::{grid-item-card} 🤖 Vibe Coding
+:link: vibe-coding/index.html
+
+AI 编程方法论 · 工具链
+:::
+
+:::{grid-item-card} ⌨️ Claude Code
+:link: claude-code/index.html
+
+安装 · 配置 · 会话管理
+:::
+
 :::{grid-item-card} 📖 知识库指南
 :link: guide/index.html
 
@@ -62,6 +74,8 @@ MCU · RTOS · Linux · 硬件 · 工具链
 
 embedded/index
 tools/index
+vibe-coding/index
+claude-code/index
 cs/index
 career/index
 life/index
