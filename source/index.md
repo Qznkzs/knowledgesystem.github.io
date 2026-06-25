@@ -56,12 +56,6 @@ MCU · RTOS · Linux · 硬件 · 工具链
 AI 编程方法论 · 工具链
 :::
 
-:::{grid-item-card} ⌨️ Claude Code
-:link: vibe-coding/claude-code/index.html
-
-安装 · 配置 · 会话管理
-:::
-
 :::{grid-item-card} 📖 知识库指南
 :link: guide/index.html
 
