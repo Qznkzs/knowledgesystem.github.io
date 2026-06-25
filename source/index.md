@@ -49,4 +49,10 @@ MCU · RTOS · Linux · 硬件 · 工具链
 
 阅读 · 旅行 · 日常感悟
 :::
+
+:::{grid-item-card} 📖 知识库指南
+:link: guide/index.html
+
+构建 · 使用 · 维护文档
+:::
 ::::
