@@ -45,10 +45,34 @@ sphinx-build -b html source/ build/
 ### 4. 本地预览
 
 ```bash
-python -m http.server 8080 -d build/
+# 先构建（可合并为一行）
+sphinx-build -q -b html source/ build/
+
+# 启动本地服务
+python3 -m http.server 8080 -d build/
 ```
 
-浏览器打开 `http://localhost:8080` 即可预览站点。
+本机浏览器打开 `http://localhost:8080` 即可预览。
+
+**虚拟机场景：** 如果代码在虚拟机上，想在宿主机访问：
+
+```bash
+# 查看虚拟机 IP
+hostname -I | awk '{print $1}'
+
+# 确认服务监听在 0.0.0.0（默认行为）
+ss -tlnp | grep 8080
+```
+
+然后宿主机浏览器打开 `http://<虚拟机IP>:8080`。
+
+如果连接被拒绝，检查虚拟机防火墙：
+
+```bash
+sudo ufw allow 8080
+```
+
+停止服务按 `Ctrl+C`。
 
 ### 5. 包含私有内容的本地构建
 
