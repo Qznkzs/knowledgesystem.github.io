@@ -56,3 +56,9 @@ MCU · RTOS · Linux · 硬件 · 工具链
 构建 · 使用 · 维护文档
 :::
 ::::
+
+```{toctree}
+:hidden:
+
+guide/index
+```
