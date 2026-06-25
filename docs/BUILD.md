@@ -96,10 +96,49 @@ Deploy to GitHub Pages
 
 ### 首次启用 GitHub Pages
 
-1. 代码推送到 GitHub 后，进入仓库 **Settings > Pages**
-2. 在 "Build and deployment" 下，Source 选择 **GitHub Actions**
-3. 等待第一次 workflow 运行完成
-4. 站点地址：`https://qznkzs.github.io/knowledgesystem.github.io/`
+首次部署需要完成以下步骤，否则访问站点会显示 404：
+
+**1. 确认仓库为 Public（公开）**
+
+进入仓库 **Settings > General**，滚动到页面底部 **Danger Zone**：
+
+- 确认 **Visibility** 显示为 **Public**
+- 如果是 **Private**，点击 **Change visibility** → 选择 **Public**
+
+> 免费版 GitHub Pages 只支持公开仓库。私有仓库需要 GitHub Pro/Team/Enterprise 订阅。
+
+**2. 启用 GitHub Pages 并设置部署源**
+
+进入仓库 **Settings > Pages**，在 **Build and deployment** 区域：
+
+- **Source** 下拉选择 **GitHub Actions**（不是 "Deploy from a branch"）
+
+**3. 触发首次部署**
+
+如果代码已经推送（`git push`），进入仓库 **Actions** 标签页：
+- 找到 **Deploy Knowledge Base** workflow
+- 点击 **Run workflow** → **Run workflow**（手动触发）
+- 等待 workflow 运行完成（约 1-2 分钟）
+
+**4. 确认部署成功**
+
+workflow 完成后，点击那次运行记录：
+- 展开 **build-and-deploy** job
+- 查看 **Deploy to GitHub Pages** 步骤的日志，末尾会显示实际部署 URL
+
+**5. 验证站点**
+
+浏览器访问部署地址，确认首页能正常打开。
+
+> **常见 404 原因汇总：**
+>
+> | 原因 | 解决方案 |
+> |------|---------|
+> | 仓库是 Private | Settings > General > 改为 Public |
+> | Pages 未启用 | Settings > Pages > Source 选 GitHub Actions |
+> | Workflow 未运行 | Actions > 手动触发 Run workflow |
+> | Workflow 权限不足 | Settings > Actions > General > Workflow permissions 选 "Read and write permissions" |
+> | 仅推送了代码，以为会自动部署 | 首次必须在 Actions 中手动触发一次，之后每次 push 会自动部署 |
 
 ### 查看部署状态
 
