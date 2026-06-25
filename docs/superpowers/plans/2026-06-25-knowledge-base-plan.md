@@ -801,3 +801,78 @@ git push origin main
 - 分类导航卡片可点击
 - 侧边栏显示最近文章
 - 标签可点击并跳转
+
+---
+
+## Post-Implementation 修复记录
+
+以下为初始实现中遇到的问题及修复方案，已纳入后续执行。
+
+### 修复 1：ABlog 模板路径
+
+**问题：** 自定义模板 `recent.html` 放在 `_templates/` 根目录，ABlog 以 `ablog/recent.html` 查找时找不到。
+
+**修复：** 将 ABlog 命名空间模板（recent.html）放入 `_templates/ablog/` 子目录。`postlist.html` 保留在 `_templates/` 根目录（ABlog 以 `postlist.html` 直接查找）。
+
+### 修复 2：PyData Theme 与 ABlog 侧边栏冲突
+
+**问题：** `pydata_sphinx_theme` 0.19.0 的 `update_and_remove_templates` 处理 `ablog/recent.html` 时抛出 `quote_from_bytes() expected bytes` 异常。
+
+**修复：** 注释掉 `html_sidebars` 配置，不显式引用 ABlog 侧边栏模板。改为用 CSS 对 ABlog 默认 HTML 输出做卡片样式。
+
+### 修复 3：分类链接 404 —— 核心修复
+
+**问题：** 首页分类导航卡片链接到 `blog/category/xxx.html`，但 ABlog 不会为每个分类生成独立页面，导致 404。
+
+**根因：**
+
+1. ABlog 的分类（category）必须在 `{post}` 指令中通过 `:category:` 选项声明，**不能只写在 YAML frontmatter 中**
+2. ABlog 不会自动为每个分类生成独立 HTML 页面
+3. 需要用 `{postlist}` 指令配合 `:category:` 过滤器手动创建分类索引页
+
+**修复步骤：**
+
+- [ ] **F1: 修正 `{post}` 指令** —— 每篇文章的 `{post}` 指令中添加 `:category:` 选项：
+
+````markdown
+```{post} 2026-06-25
+:category: tools
+```
+````
+
+- [ ] **F2: 创建分类索引页** —— 每个分类目录下创建 `index.md`，用 `{postlist}` 过滤：
+
+```markdown
+# 工具 & 效率
+
+```{postlist}
+:category: tools
+:date: "%Y-%m-%d"
+:excerpts:
+```
+```
+
+文件清单：
+- `source/tools/index.md`（:category: tools）
+- `source/cs/index.md`（:category: cs）
+- `source/career/index.md`（:category: career）
+- `source/life/index.md`（:category: life）
+- `source/embedded/index.md`（保留 toctree，嵌入式有子分类不适用单 category 过滤）
+
+- [ ] **F3: 修正首页分类卡片链接** —— 从 `blog/category/xxx.html` 改为 `xxx/index.html`：
+
+| 卡片 | 旧链接 | 新链接 |
+|------|--------|--------|
+| 🔧 嵌入式 | `blog/category/embedded.html` | `embedded/index.html` |
+| 💻 计算机基础 | `blog/category/cs.html` | `cs/index.html` |
+| 🛠 工具 & 效率 | `blog/category/tools.html` | `tools/index.html` |
+| 💼 职业发展 | `blog/category/career.html` | `career/index.html` |
+| 🌿 生活杂谈 | `blog/category/life.html` | `life/index.html` |
+
+### 修复 4：GitHub Pages 首次部署 404
+
+**问题：** 代码推送后访问站点显示 404。
+
+**原因：** 仓库可能为 Private，或者 Settings > Pages 未启用 GitHub Actions 作为部署源，或 workflow 未运行过。
+
+**修复：** 参见 `docs/BUILD.md` 中"首次启用 GitHub Pages"章节的完整 5 步流程。
