@@ -50,7 +50,7 @@ myst_footnote_transition = True
 # 博客路径前缀
 blog_path = 'blog'
 blog_title = '晚吟的知识库'
-blog_baseurl = 'https://qznkzs.github.io/My-Knowledge-System/'
+blog_baseurl = 'https://qznkzs.github.io/knowledgesystem.github.io/'
 
 # 文章作者
 blog_authors = {
@@ -79,7 +79,7 @@ html_theme_options = {
     'secondary_sidebar_items': ['page-toc'],
     'footer_start': ['copyright'],
     'footer_end': ['theme-version'],
-    'github_url': 'https://github.com/Qznkzs/My-Knowledge-System',
+    'github_url': 'https://github.com/Qznkzs/knowledgesystem.github.io',
     'icon_links': [],
 }
 

@@ -336,7 +336,7 @@ tags:
 站点自动生成 Atom Feed，地址：
 
 ```
-https://qznkzs.github.io/My-Knowledge-System/blog/atom.xml
+https://qznkzs.github.io/knowledgesystem.github.io/blog/atom.xml
 ```
 
 可以使用任意 RSS 阅读器订阅（如 Feedly、Inoreader、NetNewsWire 等）。

@@ -81,7 +81,7 @@ tar -czf knowledge-base-backup-$(date +%Y%m%d).tar.gz \
     .
 
 # 方式三：克隆到其他位置作为备份
-git clone git@github.com:Qznkzs/My-Knowledge-System.git ~/backup/knowledge-base
+git clone git@github.com:Qznkzs/knowledgesystem.github.io.git ~/backup/knowledge-base
 ```
 
 > **数据安全原则：** 纯 Markdown 文件没有厂商锁定。即使 Sphinx/ABlog 不再维护，你的文章依然是可读的文本文件，可以被任何 Markdown 工具打开。
@@ -89,8 +89,8 @@ git clone git@github.com:Qznkzs/My-Knowledge-System.git ~/backup/knowledge-base
 ### 恢复知识库
 
 ```bash
-git clone git@github.com:Qznkzs/My-Knowledge-System.git
-cd My-Knowledge-System
+git clone git@github.com:Qznkzs/knowledgesystem.github.io.git
+cd knowledgesystem.github.io
 pip install -r requirements.txt
 sphinx-build -b html source/ build/
 ```
@@ -161,7 +161,7 @@ pip install furo
 ```html
 <!-- 添加到 post 模板底部 -->
 <script src="https://giscus.app/client.js"
-    data-repo="Qznkzs/My-Knowledge-System"
+    data-repo="Qznkzs/knowledgesystem.github.io"
     data-repo-id="<YOUR_REPO_ID>"
     data-category="Announcements"
     data-category-id="<YOUR_CATEGORY_ID>"

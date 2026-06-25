@@ -13,8 +13,8 @@
 ### 1. 克隆仓库
 
 ```bash
-git clone git@github.com:Qznkzs/My-Knowledge-System.git
-cd My-Knowledge-System
+git clone git@github.com:Qznkzs/knowledgesystem.github.io.git
+cd knowledgesystem.github.io
 ```
 
 ### 2. 安装依赖
@@ -91,7 +91,7 @@ sphinx-build -b html source/ build/
     ↓
 Deploy to GitHub Pages
     ↓
-站点更新至 qznkzs.github.io/My-Knowledge-System
+站点更新至 qznkzs.github.io/knowledgesystem.github.io
 ```
 
 ### 首次启用 GitHub Pages
@@ -99,7 +99,7 @@ Deploy to GitHub Pages
 1. 代码推送到 GitHub 后，进入仓库 **Settings > Pages**
 2. 在 "Build and deployment" 下，Source 选择 **GitHub Actions**
 3. 等待第一次 workflow 运行完成
-4. 站点地址：`https://qznkzs.github.io/My-Knowledge-System/`
+4. 站点地址：`https://qznkzs.github.io/knowledgesystem.github.io/`
 
 ### 查看部署状态
 
@@ -113,7 +113,7 @@ Deploy to GitHub Pages
 ## 目录结构
 
 ```
-My-Knowledge-System/
+knowledgesystem.github.io/
 ├── .github/workflows/deploy.yml   # CI/CD 工作流
 ├── source/                        # 源文件目录（所有文章在这里）
 │   ├── conf.py                   # Sphinx 配置文件
