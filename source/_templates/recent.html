@@ -1,0 +1,16 @@
+<div class="ablog-sidebar-item">
+  <h3 class="ablog-sidebar-title">
+    <a href="{{ pathto(blog_path) }}">📝 最近文章</a>
+  </h3>
+  <ul class="ablog-recent-posts">
+    {% set recent_posts = ablog.recent(10, paths=['blog']) %}
+    {% for p in recent_posts %}
+      <li>
+        <a href="{{ pathto(p.docname) }}{{ anchor(p) }}">{{ p.title }}</a>
+        {% if p.date %}
+          <span class="recent-post-date">{{ p.date.strftime('%m-%d') }}</span>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</div>

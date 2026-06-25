@@ -1,0 +1,54 @@
+{% extends "page.html" %}
+
+{% block body %}
+<div class="ablog-bloglist">
+
+  {% if ablog %}
+    <div class="blog-card-grid">
+      {% for post in ablog %}
+        <article class="blog-card">
+          <header class="blog-card-header">
+            <h2 class="blog-card-title">
+              <a href="{{ pathto(post.docname) }}{{ anchor(post) }}">{{ post.title }}</a>
+            </h2>
+            <div class="blog-card-meta">
+              {% if post.date %}
+                <time class="blog-card-date" datetime="{{ post.date.isoformat() }}">
+                  {{ post.date.strftime('%Y-%m-%d') }}
+                </time>
+              {% endif %}
+              {% if post.category %}
+                <span class="blog-card-category">
+                  <a href="{{ pathto(blog_path) }}/category/{{ post.category }}.html">
+                    {{ post.category }}
+                  </a>
+                </span>
+              {% endif %}
+            </div>
+          </header>
+
+          {% if post.excerpt %}
+            <div class="blog-card-excerpt">
+              {{ post.excerpt }}
+            </div>
+          {% endif %}
+
+          {% if post.tags %}
+            <footer class="blog-card-footer">
+              <div class="blog-card-tags">
+                {% for tag in post.tags %}
+                  <a href="{{ pathto(blog_path) }}/tag/{{ tag }}.html"
+                     class="blog-tag">#{{ tag }}</a>
+                {% endfor %}
+              </div>
+            </footer>
+          {% endif %}
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>暂无文章。</p>
+  {% endif %}
+
+</div>
+{% endblock %}
