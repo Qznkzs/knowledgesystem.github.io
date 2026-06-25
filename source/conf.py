@@ -76,7 +76,7 @@ html_theme_options = {
     'navbar_start': ['navbar-logo'],
     'navbar_center': ['navbar-nav'],
     'navbar_end': ['navbar-icon-links'],
-    'secondary_sidebar_items': ['page-toc', 'ablog/recent.html'],
+    'secondary_sidebar_items': ['page-toc'],
     'footer_start': ['copyright'],
     'footer_end': ['theme-version'],
     'github_url': 'https://github.com/Qznkzs/My-Knowledge-System',
@@ -90,20 +90,20 @@ html_css_files = [
     'custom.css',
 ]
 
-# 侧边栏配置
-html_sidebars = {
-    'blog/**': [
-        'ablog/postcard.html',
-        'ablog/recent.html',
-        'ablog/tagcloud.html',
-        'ablog/archives.html',
-    ],
-    '**': [
-        'search-field.html',
-        'sidebar-nav-bs.html',
-        'ablog/recent.html',
-    ],
-}
+# 侧边栏配置（暂时使用 pydata 默认配置，避免与 ABlog 模板冲突）
+# html_sidebars = {
+#     'blog/**': [
+#         'ablog/postcard.html',
+#         'ablog/recent.html',
+#         'ablog/tagcloud.html',
+#         'ablog/archives.html',
+#     ],
+#     '**': [
+#         'search-field.html',
+#         'sidebar-nav-bs.html',
+#         'ablog/recent.html',
+#     ],
+# }
 
 # -- Intersphinx --------------------------------------------------
 
